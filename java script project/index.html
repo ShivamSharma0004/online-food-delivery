@@ -1,0 +1,976 @@
+<html>
+
+<head>
+    <title>
+        online food delivery services in india
+    </title>
+</head>
+<script>
+    //   slide show
+
+    var a, b, i = 4;
+    a = new Array('p1.jpg', 'p2.jpg', 'p3.jpg', 'p4.jpg', 'p5.jpg');
+    b = new Array('pizza', 'chicken', 'our menu', 'chicken', 'french fries');
+    function slid() {
+        if (i < 4) {
+            i++;
+        }
+        else {
+            i = 0;
+        }
+        document.getElementById("s11").src = a[i];
+        document.getElementById("s1").innerHTML = b[i];
+
+        setTimeout("slid()", 1000);
+    }
+
+    //bill part
+
+    function show() {
+        var p;
+        p = document.getElementById("p").value;
+        if (p == 'pizza') {
+            document.getElementById("r").value = 199;
+            document.getElementById("i").src = 'pizza.jpg';
+        }
+        else if (p == 'burgur') {
+            document.getElementById("r").value = 149;
+            document.getElementById("i").src = 'burgur.jpg';
+        }
+        else if (p == 'french fries') {
+            document.getElementById("r").value = 99;
+            document.getElementById("i").src = 'french fries.jpg';
+        }
+        else {
+            document.getElementById("r").value = 0;
+            document.getElementById("i").src = ' ';
+        }
+    }
+
+    function cart() {
+        var p, q, r, i;
+        p = document.getElementById("p").value;
+        q = document.getElementById("q").value;
+        r = document.getElementById("r").value;
+        i = document.getElementById("i").src;
+
+        if (p != 's' && q != '0') {
+            var p1, p2, p3;
+            p1 = document.getElementById("p1").value;
+            p2 = document.getElementById("p2").value;
+            p3 = document.getElementById("p3").value;
+
+            if (p1 == '0') {
+                document.getElementById("p1").value = p;
+                document.getElementById("q1").value = q;
+                document.getElementById("r1").value = r;
+                document.getElementById("i1").src = i;
+            }
+            else if (p2 == '0') {
+                document.getElementById("p2").value = p;
+                document.getElementById("q2").value = q;
+                document.getElementById("r2").value = r;
+                document.getElementById("i2").src = i;
+            }
+            else if (p3 == '0') {
+                document.getElementById("p3").value = p;
+                document.getElementById("q3").value = q;
+                document.getElementById("r3").value = r;
+                document.getElementById("i3").src = i;
+            }
+            else {
+                alert("cart is full");
+            }
+        }
+
+        else {
+            alert("select any product")
+        }
+    }
+
+
+    function bill() {
+        if (ncheck2() == 'y' && phcheck2() == 'y' && echeck2() == 'y') {
+            var p1, q1, r1, a1 = 0;
+            p1 = document.getElementById("p1").value;
+            q1 = document.getElementById("q1").value;
+            r1 = document.getElementById("r1").value;
+            if (p1 != '0' && q1 != '0') {
+                a1 = r1 * q1;
+            }
+            var p2, q2, r2, a2 = 0;
+            p2 = document.getElementById("p2").value;
+            q2 = document.getElementById("q2").value;
+            r2 = document.getElementById("r2").value;
+            if (p2 != '0' && q2 != '0') {
+                a2 = r2 * q2;
+            }
+            var p3, q3, r3, a3 = 0;
+            p3 = document.getElementById("p3").value;
+            q3 = document.getElementById("q3").value;
+            r3 = document.getElementById("r3").value;
+            if (p3 != '0' && q3 != '0') {
+                a3 = r3 * q3;
+            }
+
+            var a = 0;
+            a = a1 + a2 + a3;
+            if (a > 0) {
+                var n, e, p;
+                n = document.getElementById("n11").value;
+                e = document.getElementById("e11").value;
+                ph = document.getElementById("ph11").value;
+
+                document.getElementById("t").value = "Dear " + n;
+                document.getElementById("t").value += "\n Your Bill details send on your given Email Id " + e + " , Or Phone No " + ph;
+                if (a1 > 0) {
+                    document.getElementById("t").value += "\n\n Your Purchage items " + p1 + "units " + q1 + " , per/pic Rs  " + r1;
+                }
+                if (a2 > 0) {
+                    document.getElementById("t").value += "\n\n Your Purchage items " + p2 + "units " + q2 + " , per/pic Rs  " + r2;
+                }
+                if (a3 > 0) {
+                    document.getElementById("t").value += "\n\n Your Purchage items " + p3 + "units " + q3 + " , per/pic Rs  " + r3;
+                }
+                document.getElementById("t").value += "\n\n Your Total Bill Rs " + a;
+                document.getElementById("t").value += "\n\n\n ******THANKS FOR SHOPING******* ";
+
+            }
+            else {
+                alert("select any items");
+            }
+
+
+        }
+        else {
+            ncheck2();
+            phcheck2();
+            echeck2();
+            alert("**** check above details");
+        }
+    }
+    function ncheck2() {
+        var nc = /^[a-zA-Z ]+$/;
+        n = document.getElementById("n11").value;
+        if (!n.match(nc) || n.length == 0) {
+            document.getElementById("n111").innerHTML = "**** check name again";
+            return 'n';
+        }
+        else {
+            document.getElementById("n111").innerHTML = "";
+            return 'y';
+        }
+    }
+
+    function echeck2() {
+        var ec = /^[a-zA-Z0-9._-]+\@[a-zA-Z0-9]+\.[a-zA-Z.]{2,6}$/;
+        e = document.getElementById("e11").value;
+        if (!e.match(ec)) {
+            document.getElementById("e111").innerHTML = "**** check name again";
+            return 'n';
+        }
+        else {
+            document.getElementById("e111").innerHTML = "";
+            return 'y';
+        }
+    }
+
+    function phcheck2() {
+        var phc = /^[0-9]{10,10}$/;
+        ph = document.getElementById("ph11").value;
+        if (!ph.match(phc)) {
+            document.getElementById("ph111").innerHTML = "**** check name again";
+            return 'n';
+        }
+        else {
+            document.getElementById("ph111").innerHTML = "";
+            return 'y';
+        }
+    }
+
+    function clear1() {
+        document.getElementById("p1").value = 0;
+        document.getElementById("q1").value = 0;
+        document.getElementById("r1").value = 0;
+        document.getElementById("i1").src = '';
+    }
+
+    function clear2() {
+        document.getElementById("p2").value = 0;
+		
+        document.getElementById("q2").value = 0;
+        document.getElementById("r2").value = 0;
+        document.getElementById("i2").src = '';
+    }
+
+    function clear3() {
+        document.getElementById("p3").value = 0;
+        document.getElementById("q3").value = 0;
+        document.getElementById("r3").value = 0;
+        document.getElementById("i3").src = '';
+    }
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* home section */
+    #home {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background: url('home photo.jpg') no-repeat center center/cover;
+    }
+
+    #logo {
+        position: absolute;
+        top: 0%;
+        right: 5%;
+        width: 100px;
+        height: 100px;
+        padding: 0px 4px;
+        margin: -6px -10px;
+    }
+
+    /* navigation section */
+    #nav {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 10%;
+        background-color: rgba(241, 217, 217, 0.1);
+
+    }
+
+    ul li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    ul li {
+        width: 100px;
+        height: 20px;
+        float: left;
+        list-style: none;
+        padding: 8px 4px;
+        margin: 18px 20px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    ul li:hover {
+        background-color: rgb(247, 224, 224);
+        border-radius: 10px;
+    }
+
+    #para {
+        position: absolute;
+        top: 25%;
+        left: 2%;
+        width: 50%;
+        height: 50%;
+    }
+
+    #f {
+        color: red;
+        font-weight: bolder;
+    }
+
+    /* #btn {
+        position: absolute;
+        bottom: 10%;
+        left: 40%;
+        width: 70px;
+        height: 40px;
+        border-radius: 19px;
+        text-decoration:none;
+        list-style: none;
+    } */
+
+    #para p {
+        color: white;
+        font-size: 1 rem;
+        text-align: center;
+        font-family: cursive;
+    }
+
+    #para p:hover {
+        color: pink;
+
+    }
+
+    #para h1 {
+        padding: 25px 4px;
+        color: white;
+        font-size: 2 rem;
+        text-align: center;
+    }
+
+    #para h1:hover {
+        color: pink;
+    }
+
+    #form {
+        position: absolute;
+        top: 25%;
+        right: 5%;
+        width: 30%;
+        height: 50%;
+        background-color: rgba(241, 209, 214, 0.1);
+        border-radius: 10px;
+        padding: 10px 8px;
+        margin: 0px 0px;
+        text-align: center;
+    }
+
+    #form h1 {
+        color: white;
+        font-family: sans-serif;
+    }
+
+    #form input[type='text']{
+        text-align: center;
+		border:none;
+		border-bottom:2px solid black;
+		padding:4px 4px;
+    }
+	
+	::placeholder{
+background-color:transparent;
+background-color: rgba(241, 209, 214, 0.1);
+}
+
+#btn3{
+padding:4px 4px;
+}
+
+    /* services section */
+
+
+    #services {
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(233, 194, 200);
+    }
+
+    #mar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(250, 131, 131);
+        color: black;
+        font-size: 1.9vw;
+    }
+
+    #services h1 {
+        text-align: center;
+        margin: 45px 4px;
+    }
+
+    .items {
+        position: absolute;
+        width: 30%;
+        height: 50%;
+        background-color: rgba(243, 193, 243, 0.2);
+        border-radius: 10px;
+        outline: 2px solid black;
+        text-align: center;
+        padding: 4px 4px;
+    }
+
+
+
+    .items img {
+        border-radius: 10px;
+    }
+
+    #m1 {
+        top: 25%;
+        left: 3%;
+    }
+
+    #m2 {
+        top: 25%;
+        left: 35%;
+    }
+
+    #m3 {
+        top: 25%;
+        left: 67%;
+    }
+
+
+    #m1:hover {
+        background-color: rgb(229, 147, 229);
+    }
+
+    #m2:hover {
+        background-color: rgb(229, 147, 229);
+    }
+
+    #m3:hover {
+        background-color: rgb(248, 148, 248);
+    }
+
+
+    #a1 {
+        position: absolute;
+        top: 200%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: red;
+    }
+
+
+    #s1 {
+        position: absolute;
+        left: 5%;
+        bottom: 5%;
+        height: 10%;
+        width: 90%;
+        color: rgba(224, 16, 16, 0.671);
+        text-align: center;
+        font-size: 4vw;
+    }
+
+
+
+    #contact {
+        position: absolute;
+        top: 400%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        
+        background-color: rgb(255, 159, 175);
+    }
+
+    #c1 {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        width: 40%;
+        height: 60%;
+        background-color: rgb(255, 220, 224);
+        text-align: center;
+        padding: 10px 2px;
+        margin: 2px 2px;
+        border-top-right-radius: 70px;
+    }
+
+
+
+    #c2 {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        width: 40%;
+        height: 26%;
+        background-color: rgb(255, 220, 224);
+        text-align: center;
+        padding: 81px 2px;
+        margin: 26px 2px;
+        border-top-right-radius: 70px;
+    }
+
+    #map {
+        position: absolute;
+        top: 500%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #up {
+        position: fixed;
+        bottom: 2%;
+        right: 2%;
+        width: 100px;
+        height: 100px;
+    }
+
+    #up img {
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
+    }
+
+    /*bill section*/
+
+    #order {
+        position: absolute;
+        top: 300%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        
+        background-color:rgb(241, 165, 178);
+    }
+
+    #j1 {
+        position: absolute;
+        top: 2%;
+        left: 5%;
+        width: 90%;
+        height: 10%;
+        background-color: rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+    }
+
+    #k1 {
+        position: absolute;
+        top: 0%;
+        left: 15%;
+        width: 20%;
+        height: 10%;
+        margin: 4px 2px;
+        padding: 2px 2px;
+    }
+
+    #k2 {
+        position: absolute;
+        top: 0%;
+        left: 40%;
+        width: 20%;
+        height: 10%;
+
+        margin: 4px 2px;
+        padding: 2px 2px;
+    }
+
+    #k3 {
+        position: absolute;
+        top: 0%;
+        left: 65%;
+        width: 20%;
+        height: 10%;
+        margin: 4px 2px;
+        padding: 2px 2px;
+    }
+
+    #j2 {
+        position: absolute;
+        top: 15%;
+        left: 5%;
+        width: 90%;
+        height: 20%;
+        background-color: rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+    }
+
+    .product {
+        position: absolute;
+        width: 15%;
+        height: 10%;
+        top: 5%;
+        background-color: rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+    }
+
+    #d1 {
+        left: 5%;
+        margin: 20px 2px;
+    }
+
+    #d2 {
+        left: 20%;
+        margin: 20px 2px;
+    }
+
+    #d3 {
+        left: 45%;
+        margin: 20px 2px;
+    }
+
+    #d4 {
+        left: 60%;
+    }
+
+    #d5 {
+        position: absolute;
+        top: 5%;
+        width: 100px;
+        height: 40px;
+        right: 5%;
+        margin: 30px 2px;
+        border-radius: 20px;
+    }
+
+    #d6 {
+        position: absolute;
+        top: 40%;
+        width: 90%;
+        height: 50%;
+        left: 5%;
+        background-color:rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+    }
+
+    .d {
+        position: absolute;
+        top: 10%;
+        width: 15%;
+        height: 80%;
+        text-align: center;
+        border: 2px solid black;
+        background-color:rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+    }
+
+    #dd1 {
+        left: 1%;
+    }
+
+    #dd2 {
+        left: 17%;
+    }
+
+    #dd3 {
+        left: 33%;
+    }
+
+    #btn2 {
+        position: absolute;
+        top: 45%;
+        width: 8%;
+        height: 10%;
+        left: 53%;
+        padding:4px 4px;
+        border-radius: 10px;
+        background-color: cyan;
+    }
+
+    #t {
+        position: absolute;
+        right: 5%;
+        top: 10%;
+        width: 30%;
+        height: 75%;
+        background-color:rgb(255, 220, 224);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    #order input[type='text']{
+        text-align: center;
+        
+    }
+</style>
+
+<body onload="slid()">
+    <div id="home">
+        <div id="nav">
+            <div id="logo">
+                <img src="logo food.png" width="100px" height="100px">
+            </div>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#a1">MENU</a></li>
+                <li><a href="#order">ORDER HERE</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#map">MAP</a></li>
+            </ul>
+        </div>
+        <div id="para">
+            <h1>welcome to one of the best <br><span id="f">food delivery</span><br>in india</h1>
+            <p>Explore restaurants that deliver near you, or try yummy takeout fare. With a place for every taste, it’s
+                easy to find food you crave, and order online or through the Grubhub app.<br> Enjoy eating the
+                convenient way
+                with places that deliver to your door.</p>
+            <!-- <button id="btn"><a href="#">ORDER</a></button> -->
+        </div>
+        <div id="form">
+            <h1>Write a Review</h1><br><br>
+
+            <input type="text" id="n" placeholder="Enter name here" onblur="namecheck1()"><br>
+            <span id="n1" style="color:red"></span>
+            <br>
+
+            <input type="text" id="e" placeholder="Enter email here" onblur="emailcheck1()"><br>
+            <span id="e1" style="color:red"></span>
+            <br>
+
+            <input type="text" id="ph" placeholder="Enter phone no here" maxlength="10" onblur="phonecheck1()"><br>
+            <span id="ph1" style="color:red"></span>
+            <br>
+            About us<br>
+            <textarea id="ta" width="600px%" height="400px" onblur="adresscheck1()"></textarea><br>
+            <span id="ta1" style="color:red"></span>
+            <br>
+            <button id="btn3" onclick="button()">submit</button>
+        </div>
+    </div>
+
+
+
+    <div id="services">
+        <h1>OUR SERVICES</h1>
+        <div class="items" id="m1">
+            <img src="pizza.jpg" width="275px" height="183px">
+            <h2>PIZZA</h2>
+            <p class="para">Pizza is a dish of Italian origin consisting of a usually round, flat base of leavened
+                wheat-based dough topped with tomatoes, cheese, and often various other ingredients, which is then baked
+                at a high temperature, traditionally in a wood-fired oven.</p>
+        </div>
+        <div class="items" id="m2">
+            <img src="burgur.jpg" width="275px" height="183px">
+            <h2>BURGUR</h2>
+            <p class="para">- Cheese burger memo pads. Made of sponge and sticky colour papers for taking notes
+                - Comes with 60 blank sheets sporting the colours of ketchup, cheese and lettuce
+                - These look so much like real food, some people may even mistake of taking a bite
+                - Open the bread or bun to expose the red, yellow and green sticky pads and start</p>
+        </div>
+        <div class="items" id="m3">
+            <img src="french fries.jpg" width="275px" height="183px">
+            <h2>FRENCH FRIES</h2>
+            <p class="para">Pizza is a dish of Italian origin consisting of a usually round, flat base of leavened
+                wheat-based dough topped with tomatoes, cheese, and often various other ingredients, which is then baked
+                at a high temperature, traditionally in a wood-fired oven.</p>
+        </div>
+        <div id="mar">
+            <marquee behavior="alternate" onmouseover="stop()" scrollamount="10">50% off on first order(bill over 500)
+            </marquee>
+        </div>
+    </div>
+
+    <div id="a1"><img src="" width="100%" id="s11" height="100%">
+        <span id="s1"></span>
+    </div>
+    <div id="order">
+        <div id="j1">
+            <div id="k1">
+                Name<br>
+                <input type="text" id="n11" onblur="ncheck2()" placeholder="Enter Name">
+                <span id="n111" style="color:red"></span><br><br>
+            </div>
+
+            <div id="k2">
+                Email<br>
+                <input type="text" id="e11" onblur="echeck2()" placeholder="Enter Email">
+                <span id="e111" style="color:red"></span><br><br>
+            </div>
+
+            <div id="k3">
+                Phone number<br>
+                <input type="text" id="ph11" onblur="phcheck2()" placeholder="Enter Phone no" maxlength="10">
+                <span id="ph111" style="color:red"></span><br><br>
+            </div>
+
+        </div>
+
+        <div id="j2">
+            <div class="product" id="d1">
+                product<br>
+                <select id="p" onchange="show()">
+                    <option value="s">select</option>
+                    <option value="pizza">pizza</option>
+                    <option value="burgur">burgur</option>
+                    <option value="french fries">french fries</option>
+                </select>
+            </div>
+
+            <div class="product" id="d2">
+                Rate<br>
+                <input type="text" id="r" readonly>
+            </div>
+
+            <div class="product" id="d3">
+                Quantity<br>
+                <select id="q">
+                    <option value="0">select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="product" id="d4">
+                Image:-<img src=" " width="100px" id="i" height="100px"><br>
+            </div>
+
+            <button onclick="cart()" id="d5">Add to Cart</button>
+        </div>
+
+        <div id="d6">
+            <div class="d" id="dd1">
+                Product<br><input type="text" id="p1" value="0" readonly><br><br>
+                Rate<br><input type="text" id="r1" value="0" readonly><br><br>
+                Quantity<br><input type="text" id="q1" value="0" readonly><br><br>
+                <button onclick="clear1()">clear</button>
+            </div>
+
+            <div class="d" id="dd2">
+                Product<br><input type="text" id="p2" value="0" readonly><br><br>
+                Rate<br><input type="text" id="r2" value="0" readonly><br><br>
+                Quantity<br><input type="text" id="q2" value="0" readonly><br><br>
+                <button onclick="clear2()">clear</button>
+            </div>
+
+            <div class="d" id="dd3">
+                Product<br><input type="text" id="p3" value="0" readonly><br><br>
+                Rate<br><input type="text" id="r3" value="0" readonly><br><br>
+                Quantity<br><input type="text" id="q3" value="0" readonly><br><br>
+                <button onclick="clear3()">clear</button>
+            </div>
+            <button id="btn2" onclick="bill()">bill</button>
+
+            Total bill<br><br><textarea cols="100" rows="15" id="t" readonly></textarea><br>
+
+        </div>
+
+
+        <div>
+
+        </div>
+    </div>
+    <div id="contact">
+        <div id="c1">
+            <h1>Our Contacts</h1><br>
+            <hr>
+            <hr><br><br>
+            <h2>E-mail:-foodindia@gmail.com</h2><br>
+            <h2>contact no:-9987456734</h2><br>
+            <h2>whatsapp no:-9954673823</h2><br><br>
+            <hr>
+            <hr><br><br>
+            <h1>Open Hours</h1>
+            mon-fri:-9:00 am to 11:30 pm ||
+            <br>
+            sat-sun:-8:00 am to 12:30 pm ||
+        </div>
+        <div id="c2">
+            <h1>People's thought about us</h1>
+            <br><br>
+            <hr>
+            <hr><br><br>
+            <h2>food was great,service was too lovable and taste of the food was too osmm....</h2>
+        </div>
+    </div>
+    <div id="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12679.75782362001!2d85.3453837584791!3d23.37381042174295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e15939d511f3%3A0x60c402f508862ab!2sJH-01%20Cafe%20%26%20Restro!5e0!3m2!1sen!2sin!4v1643458492551!5m2!1sen!2sin"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <a href="#home">
+        <div id="up"><img src="up.jpg"></div>
+    </a>
+</body>
+<script>
+
+
+
+
+
+
+    function namecheck1() {
+        var nc = /^[a-zA-Z ]+$/;
+        var n = document.getElementById("n").value;
+        n = n.trim();
+        if (!n.match(nc) || n.length == 0) {
+            document.getElementById("n1").innerHTML = "*** check name ";
+            return 'n';
+        }
+        else {
+            document.getElementById("n1").innerHTML = "";
+            return 'y';
+        }
+    }
+
+    function phonecheck1() {
+        var ph = /^[0-9]{10,10}$/;
+        var p = document.getElementById("ph").value;
+
+        if (!p.match(ph)) {
+            document.getElementById("ph1").innerHTML = "*** check number ";
+            return 'n';
+
+        }
+        else {
+            document.getElementById("ph1").innerHTML = "";
+            return 'y';
+        }
+    }
+
+
+    function emailcheck1() {
+        var em = /^[a-zA-Z0-9._-]+\@[a-zA-Z0-9]+\.[a-zA-Z.]{2,6}$/;
+        var e = document.getElementById("e").value;
+
+        if (!e.match(em)) {
+            document.getElementById("e1").innerHTML = "*** check Email ";
+            return 'n';
+
+        }
+        else {
+            document.getElementById("e1").innerHTML = "";
+            return 'y';
+        }
+    }
+
+    function addresscheck1() {
+
+        var a = document.getElementById("ta").value;
+        a = a.trim();
+        if (a.length < 10) {
+            document.getElementById("ta1").innerHTML = "*** check message ";
+            return 'n';
+
+        }
+        else {
+            document.getElementById("ta1").innerHTML = "";
+            return 'y';
+        }
+    }
+
+
+
+    function button() {
+        if (namecheck1() == 'y' && emailcheck1() == 'y' && phonecheck1() == 'y' &&
+            addresscheck1() == 'y') {
+            var n, ph, e, d;
+            n = document.getElementById("n").value;
+            ph = document.getElementById("ph").value;
+            e = document.getElementById("e").value;
+
+            r = "your entered detail are ";
+            r += " name " + n;
+            r += " email " + e;
+            r += " phone number " + ph;
+
+
+            var ta = document.getElementById("ta").value;
+            r += " message :- " + ta;
+            r += " thankeww for the review sir/mam ";
+            alert(r);
+
+        }
+        else {
+            namecheck1();
+            emailcheck1();
+            phonecheck1();
+
+            addresscheck1();
+
+            alert("please write review sir/mam");
+        }
+    }
+
+</script>
+
+</html>
